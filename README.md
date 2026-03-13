@@ -1,14 +1,14 @@
 # Project – Post Office Server
 
-The goal of this project is to extend the **MINIX** system with a server that enables communication between user processes via messages.  
-Each user process should have its own mailbox that can hold **exactly one message**.
+This project extends the **MINIX** system with a server that enables communication between user processes via messages.  
+Each user process has its own mailbox that can hold **exactly one message**.
 
 ***
 
 ## User Process Interface
 
-The following functions should be implemted in the system library `libc` (e.g., in `lib\libc\sys-minix\`).
-Function delarations and definition of type `package` are provided in `include\po.h'.
+The following functions are available in the system library `libc` (e.g., in `lib\libc\sys-minix\`).  
+Function declarations and the definition of type `package` are provided in `include\po.h`.
 
 *   **`int post(package *pp, pid_t pid)`**  
     Places message `pp` in the mailbox of process `pid`.  
@@ -40,12 +40,12 @@ Function delarations and definition of type `package` are provided in `include\p
 
 *   **`int send_bomb(pid_t pid, int timer)`**  
     Sends a special message (“bomb”) to the mailbox of process `pid`.  
-    A process that tries to read this message using `retrieve` or `retrieve_wait` should immediately receive a `SIGTERM` signal.  
-    Additionally, if the message is not read within `timer` microseconds, `SIGTERM` should be sent to the process whose mailbox contains the bomb.  
+    A process that tries to read this message using `retrieve` or `retrieve_wait` immediately receives a `SIGTERM` signal.  
+    Additionally, if the message is not read within `timer` microseconds, `SIGTERM` is sent to the process whose mailbox contains the bomb.  
     After sending the signal, the mailbox becomes empty.  
-    If `timer <= 0`, `SIGTERM` should be sent immediately to the sender.  
-    If the message cannot be delivered, it should be put in the sender’s mailbox.  
-    In such a case, if the sender’s mailbox is busy, the sender should immediately receive `SIGTERM`.  
+    If `timer <= 0`, `SIGTERM` is sent immediately to the sender.  
+    If the message cannot be delivered, it is put in the sender’s mailbox.  
+    In such a case, if the sender’s mailbox is busy, the sender immediately receives `SIGTERM`.  
     In all cases, the message disappears after the signal is sent.
 
 UPDATE: forwarded and sent back packages do not change its sender.
@@ -67,21 +67,21 @@ Possible `errno` values:
 
 ## Signal Handling
 
-Processes blocked in `retrieve_wait` should immediately handle incoming signals according to their registered handlers.  
+Processes blocked in `retrieve_wait` immediately handle incoming signals according to their registered handlers.  
 If waiting is interrupted, the function returns `-1` and sets `errno = EINTR`.
 
 ***
 
 ## Tests
 
-The solution will be tested on **MINIX 3.2.1**.  
+The solution is tested on **MINIX 3.2.1**.  
 The `tests/` directory contains files for user-level tests.
 
 ***
 
 ## Repository Structure
 
-*   `src/` – mirrors part of the MINIX source tree, containing files to modify.  
+*   `src/` – mirrors part of the MINIX source tree, containing modified files.  
     To test the solution:
     1.  Copy the contents of `src/` to `/usr/src` in MINIX.
     2.  Install headers, recompile and install the appropriate libraries and the new server.
@@ -89,4 +89,3 @@ The `tests/` directory contains files for user-level tests.
     4.  After reboot, start the server and verify functionality.
 
 *   `tests/` – contains user-level test sources.
-
