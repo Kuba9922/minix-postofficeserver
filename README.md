@@ -74,7 +74,10 @@ If waiting is interrupted, the function returns `-1` and sets `errno = EINTR`.
 
 ## Tests
 
-The solution is tested on **MINIX 3.2.1**.  
+The solution was tested on **MINIX 3.2.1**.  
+## Tests
+
+The project was tested on **MINIX 3.2.1**.  
 The `tests/` directory contains files for user-level tests.
 
 ***
@@ -88,4 +91,4 @@ The `tests/` directory contains files for user-level tests.
     3.  Rebuild the system image to include changes in core servers (e.g., PM).
     4.  After reboot, start the server and verify functionality.
 
-*   `tests/` – contains user-level test sources.
+*   `tests/` – contains user-level tests.
